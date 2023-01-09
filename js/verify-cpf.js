@@ -1,9 +1,7 @@
 export default function IsCPF(field) {
     const cpf = field.value.replace(/\.|-/g,"");
-    if(verifyRepitedNumber(cpf) || !verifyFirstNumber(cpf) || !verifySecondNumber(cpf)){
-        console.log("CPF Inválido!");
-    }else{
-        console.log("CPF Válido!");
+    if(verifyRepitedNumber(cpf) || verifyFirstNumber(cpf) || verifySecondNumber(cpf)){
+        field.setCustomValidity("Este CPF Não é Válido");
     }
 
 }

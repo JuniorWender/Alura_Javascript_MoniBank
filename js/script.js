@@ -1,6 +1,22 @@
 import IsCPF from "./verify-cpf.js";
 import legalAge from "./verify-age.js";
 const formField = document.querySelectorAll('[required]');
+const form = document.querySelector("[data-formulario]");
+
+form.addEventListener("submit", (e) =>{
+    e.preventDefault();
+
+    const awnserList = {
+        "nome" : e.target.elements['nome'].value,
+        "email" : e.target.elements['email'].value,
+        "rg" : e.target.elements['rg'].value,
+        "cpf" : e.target.elements['cpf'].value,
+        "aniversario" : e.target.elements['aniversario'].value,
+    }
+    localStorage.setItem('cadastro',JSON.stringify(awnserList));
+
+    window.location.href = './abrir-conta-form-2.html';
+})
 
 formField.forEach(field => {
     field.addEventListener('blur', () => VerifyField(field));
@@ -9,6 +25,7 @@ formField.forEach(field => {
 
 function VerifyField(field) {
     let message = "";
+    field.setCustomValidity('');
     if(field.name == "cpf" && field.value.length >= 11){
         IsCPF(field);
     }
